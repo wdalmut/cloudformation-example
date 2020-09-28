@@ -45,3 +45,17 @@ Resources:
             - Key: Name
               Value: 'public-1b'
           VpcId: !Ref MyVpc
+    InternetGateway:
+        Type: AWS::EC2::InternetGateway
+        Properties: 
+          Tags: 
+            - Key: Name
+              Value: igw
+    VpcAttachInternetGateway:
+        Type: AWS::EC2::VPCGatewayAttachment
+        Properties: 
+          InternetGatewayId: !Ref InternetGateway
+          VpcId: !Ref MyVpc
+Outputs:
+    DefaultNetworkACL:
+        Value: !GetAtt MyVpc.DefaultNetworkAcl
