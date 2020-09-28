@@ -10,6 +10,13 @@ Parameters:
     Subnet1aAvailabilityZone:
         Type: AWS::EC2::AvailabilityZone::Name
         Description: "CIDR Block of my first subnet"
+    Subnet1bCidrBlock:
+        Type: String
+        Default: "10.0.0.0/24"
+        Description: "CIDR Block of my first subnet"
+    Subnet1bAvailabilityZone:
+        Type: AWS::EC2::AvailabilityZone::Name
+        Description: "CIDR Block of my first subnet"
 Resources:
     MyVpc:
         Type: AWS::EC2::VPC
@@ -27,4 +34,14 @@ Resources:
           Tags: 
             - Key: Name
               Value: 'public-1a'
+          VpcId: !Ref MyVpc
+    Subnet1b:
+        Type: AWS::EC2::Subnet
+        Properties:
+          AvailabilityZone: !Ref Subnet1bAvailabilityZone
+          CidrBlock: !Ref Subnet1bCidrBlock
+          MapPublicIpOnLaunch: true
+          Tags: 
+            - Key: Name
+              Value: 'public-1b'
           VpcId: !Ref MyVpc
